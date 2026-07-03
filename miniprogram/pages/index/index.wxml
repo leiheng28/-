@@ -1,0 +1,61 @@
+<view class="page-container has-tab has-fab">
+  <block wx:if="{{isEmpty}}">
+    <view class="empty-state">
+      <view class="empty-icon">📊</view>
+      <view class="empty-title">开始管理你的资产</view>
+      <view class="empty-desc">添加第一件物品，自动计算日均成本，\nAI 帮你追踪价值变化</view>
+      <button class="btn-primary" style="width: auto; padding: 24rpx 64rpx;" bindtap="goAdd">添加第一件物品</button>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view class="card-gradient">
+      <view class="stat-label">总资产净值</view>
+      <view class="hero-number">{{totalValue}}</view>
+      <view class="row" style="margin-top: 20rpx;">
+        <view>
+          <view class="stat-label">服役中</view>
+          <view class="stat-value-sm">{{activeCount}} 件</view>
+        </view>
+        <view style="text-align: right;">
+          <view class="stat-label">本月已变现</view>
+          <view class="stat-value-sm">{{monthlySold}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="card-yellow">
+      <view class="stat-label">今日日均合计</view>
+      <view class="hero-number">{{totalDaily}}</view>
+      <view class="stat-label" style="margin-top: 8rpx;">每件物品平均每天花这些钱</view>
+    </view>
+
+    <view class="insight-card">
+      <view class="insight-title">⚡ AI 洞察</view>
+      <view class="insight-text">{{aiInsight}}</view>
+    </view>
+
+    <view class="section-title">服役中资产</view>
+    <view class="card">
+      <view
+        wx:for="{{topAssets}}"
+        wx:key="id"
+        class="list-item"
+        data-id="{{item.id}}"
+        bindtap="goDetail"
+      >
+        <view class="list-avatar">{{item.emoji}}</view>
+        <view class="list-info">
+          <view class="list-title">{{item.name}}</view>
+          <view class="list-sub">已用 {{item.days}} 天 · {{item.status}}</view>
+        </view>
+        <view class="list-right">
+          <view class="list-price">{{item.daily}}<text class="list-arrow">›</text></view>
+          <view class="list-sub">日均</view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <button wx:if="{{!isEmpty}}" class="fab" bindtap="goAdd">+</button>
+</view>

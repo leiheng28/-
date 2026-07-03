@@ -1,0 +1,46 @@
+<view class="page-container has-tab">
+  <view class="section-title">买前计算器</view>
+  <view class="muted-text" style="margin-bottom: 24rpx;">无需录入资产，快速对比购买与租用的日均成本</view>
+
+  <view class="form-group">
+    <text class="form-label">购买价格</text>
+    <input class="form-input" type="digit" value="{{price}}" placeholder="8999" bindinput="onPriceInput" />
+  </view>
+
+  <view class="form-group">
+    <text class="form-label">预计使用天数：{{daysLabel}}</text>
+    <slider min="30" max="3650" step="30" value="{{days}}" activeColor="#3ECF8E" block-size="20" bindchange="onDaysChange" />
+  </view>
+
+  <view class="form-group">
+    <text class="form-label">月租金（选填，用于租购对比）</text>
+    <input class="form-input" type="digit" value="{{rent}}" placeholder="299" bindinput="onRentInput" />
+  </view>
+
+  <view class="card">
+    <view class="calc-result">
+      <view class="muted-text" style="margin-bottom: 8rpx;">日均购买成本</view>
+      <view class="calc-number">{{buyDaily}}</view>
+      <view class="muted-text" style="margin-top: 8rpx;">/ 天</view>
+      <view wx:if="{{verdict}}" class="calc-verdict {{verdict}}">{{verdictText}}</view>
+    </view>
+  </view>
+
+  <view wx:if="{{showCompare}}" class="compare-row">
+    <view class="compare-box {{verdict === 'buy' ? 'highlight' : ''}}">
+      <view class="compare-label">购买日均</view>
+      <view class="compare-value">{{buyDaily}}</view>
+      <view class="muted-text" style="margin-top: 8rpx;">累计 {{buyTotal}}</view>
+    </view>
+    <view class="compare-box {{verdict === 'rent' ? 'highlight' : ''}}">
+      <view class="compare-label">租用日均</view>
+      <view class="compare-value">{{rentDaily}}</view>
+      <view class="muted-text" style="margin-top: 8rpx;">累计 {{rentTotal}}</view>
+    </view>
+  </view>
+
+  <view class="insight-card" style="margin-top: 32rpx;">
+    <view class="insight-title">💡 示例</view>
+    <view class="insight-text">MacBook ¥8999，使用 3 年日均 ¥8.2；同类设备月租 ¥299 日均 ¥9.96。购买更划算。</view>
+  </view>
+</view>

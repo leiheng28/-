@@ -1,0 +1,47 @@
+<view class="page-container">
+  <block wx:if="{{notFound}}">
+    <view class="empty-state">
+      <view class="empty-title">物品不存在</view>
+      <button class="btn-primary" style="margin-top: 32rpx;" bindtap="goBack">返回</button>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view class="form-group">
+      <text class="form-label">物品名称 *</text>
+      <input class="form-input" placeholder="2-30 字" maxlength="30" value="{{form.name}}" bindinput="onNameInput" />
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">品类 *</text>
+      <picker mode="selector" range="{{categories}}" value="{{categoryIndex}}" bindchange="onCategoryChange">
+        <view class="picker-value">{{form.category}}</view>
+      </picker>
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">购入价格 *</text>
+      <input class="form-input" type="digit" placeholder="0.00" value="{{form.purchasePrice}}" bindinput="onPriceInput" />
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">购入日期 *</text>
+      <picker mode="date" value="{{form.purchaseDate}}" end="{{today}}" bindchange="onDateChange">
+        <view class="picker-value">{{form.purchaseDate}}</view>
+      </picker>
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">心理目标日均（选填）</text>
+      <input class="form-input" type="digit" placeholder="例如：10.00" value="{{form.targetDaily}}" bindinput="onTargetDailyInput" />
+      <view class="form-hint">低于此日均时标记为「已回本」</view>
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">备注（选填）</text>
+      <textarea class="form-textarea" placeholder="最多 200 字" maxlength="200" value="{{form.notes}}" bindinput="onNotesInput" />
+    </view>
+
+    <button class="btn-primary" disabled="{{!isValid}}" style="margin-top: 16rpx;" bindtap="handleSubmit">保存修改</button>
+  </block>
+</view>

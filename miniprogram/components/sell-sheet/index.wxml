@@ -1,0 +1,34 @@
+<view wx:if="{{visible && asset}}" class="overlay" bindtap="onClose">
+  <view class="sheet" catchtap="stopBubble">
+    <view class="sheet-handle"></view>
+    <view class="sheet-title">标记为已卖出</view>
+
+    <view class="card text-center" style="margin-bottom: 24rpx;">
+      <view style="font-size: 48rpx;">{{asset.emoji}}</view>
+      <view class="detail-name">{{asset.name}}</view>
+      <view class="detail-meta">购入价 ¥{{asset.purchasePrice}}</view>
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">卖出价格 *</text>
+      <input class="form-input" type="digit" placeholder="0.00" value="{{sellPrice}}" bindinput="onSellPriceInput" />
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">卖出日期 *</text>
+      <picker mode="date" value="{{sellDate}}" start="{{asset.purchaseDate}}" end="{{today}}" bindchange="onSellDateChange">
+        <view class="picker-value">{{sellDate}}</view>
+      </picker>
+    </view>
+
+    <view wx:if="{{confirming}}" class="insight-card">
+      <view class="insight-title">⚠️ 确认卖出</view>
+      <view class="insight-text">卖出操作不可撤销，确定以 ¥{{sellPrice}} 卖出？</view>
+    </view>
+
+    <button class="btn-primary" disabled="{{!sellValid}}" style="margin-top: 16rpx;" bindtap="onSubmit">
+      {{confirming ? '确认卖出' : '下一步'}}
+    </button>
+    <button class="inline-btn cancel-btn" bindtap="onClose">取消</button>
+  </view>
+</view>

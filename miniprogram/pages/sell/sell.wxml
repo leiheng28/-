@@ -1,0 +1,71 @@
+<view class="page-container">
+  <block wx:if="{{notFound}}">
+    <view class="empty-state">
+      <view class="empty-title">暂无卖出记录</view>
+      <button class="btn-primary" style="margin-top: 32rpx;" bindtap="goBack">返回</button>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view class="card text-center" style="padding: 32rpx 28rpx;">
+      <view style="font-size: 64rpx; margin-bottom: 8rpx;">{{asset.emoji}}</view>
+      <view class="detail-name">{{asset.name}}</view>
+      <view class="detail-tags">
+        <text class="tag tag-red">已卖出</text>
+      </view>
+    </view>
+
+    <view class="sell-summary">
+      <view style="text-align: left;">
+        <view class="muted-text">总盈亏</view>
+        <view class="big-num {{isProfit ? 'text-green' : 'text-red'}}">{{plAmount}}</view>
+      </view>
+      <view style="text-align: right;">
+        <view class="muted-text">盈亏率</view>
+        <view style="font-size: 36rpx; font-weight: 700;" class="{{isProfit ? 'text-green' : 'text-red'}}">{{plRate}}</view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view style="font-size: 28rpx; font-weight: 600; margin-bottom: 16rpx;">交易明细</view>
+      <view class="row" style="margin-bottom: 12rpx;">
+        <text class="muted-text">购入价格</text>
+        <text style="font-size: 28rpx; font-weight: 600;">{{asset.purchasePrice}}</text>
+      </view>
+      <view class="divider"></view>
+      <view class="row" style="margin-bottom: 12rpx;">
+        <text class="muted-text">卖出价格</text>
+        <text style="font-size: 28rpx; font-weight: 600;">{{asset.sellPrice}}</text>
+      </view>
+      <view class="divider"></view>
+      <view class="row" style="margin-bottom: 12rpx;">
+        <text class="muted-text">持有天数</text>
+        <text style="font-size: 28rpx; font-weight: 600;">{{days}} 天</text>
+      </view>
+      <view class="divider"></view>
+      <view class="row">
+        <text class="muted-text">实际日均成本</text>
+        <text style="font-size: 28rpx; font-weight: 600;" class="{{isProfit ? 'text-green' : 'text-red'}}">{{daily}}/天</text>
+      </view>
+    </view>
+
+    <view class="insight-card">
+      <view class="insight-title">⚡ AI 复盘</view>
+      <view class="insight-text">{{aiReview}}</view>
+    </view>
+
+    <view class="card">
+      <view class="muted-text" style="text-align: center; margin-bottom: 16rpx;">这笔交易的持有效率</view>
+      <view class="progress-bar">
+        <view
+          class="progress-fill"
+          style="width: {{progressWidth}}%; background: {{isProfit ? 'linear-gradient(90deg, #3ecf8e, #2dd4bf)' : 'linear-gradient(90deg, #f59e0b, #ef4444)'}};"
+        ></view>
+      </view>
+      <view class="progress-text">
+        <text>{{progressLabel}}</text>
+        <text>{{progressGrade}}</text>
+      </view>
+    </view>
+  </block>
+</view>

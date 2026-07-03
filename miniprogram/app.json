@@ -1,0 +1,49 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/list/list",
+    "pages/tools/tools",
+    "pages/settings/settings",
+    "pages/add/add",
+    "pages/edit/edit",
+    "pages/detail/detail",
+    "pages/value/value",
+    "pages/sell/sell"
+  ],
+  "window": {
+    "navigationBarTitleText": "数当家",
+    "navigationBarBackgroundColor": "#f7f9fa",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f7f9fa",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#bbbbbb",
+    "selectedColor": "#3ECF8E",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "资产"
+      },
+      {
+        "pagePath": "pages/list/list",
+        "text": "列表"
+      },
+      {
+        "pagePath": "pages/tools/tools",
+        "text": "工具"
+      },
+      {
+        "pagePath": "pages/settings/settings",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents",
+  "__usePrivacyCheck__": true
+}

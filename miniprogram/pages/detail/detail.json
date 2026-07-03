@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "sell-sheet": "/components/sell-sheet/index"
+  },
+  "navigationBarTitleText": "物品详情"
+}

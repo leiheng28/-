@@ -1,0 +1,90 @@
+<view class="page-container">
+  <block wx:if="{{notFound}}">
+    <view class="empty-state">
+      <view class="empty-title">物品不存在</view>
+      <button class="btn-primary" style="margin-top: 32rpx;" bindtap="goHome">返回首页</button>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view class="card text-center card-head">
+      <view class="head-emoji">{{asset.emoji}}</view>
+      <view class="detail-name">{{asset.name}}</view>
+      <view class="detail-meta">{{asset.category}} · {{asset.purchaseDate}} 购入</view>
+    </view>
+
+    <view class="card-gradient text-center">
+      <view class="stat-label">当前估值</view>
+      <view class="hero-number">{{currentValue}}</view>
+      <view class="tag-row">
+        <text class="tag tag-white">{{profit}}</text>
+        <text class="tag tag-white">{{yieldRate}}</text>
+      </view>
+      <view class="stat-label tag-row-desc">
+        购入价 {{asset.purchasePrice}} · {{aiEstimated ? 'AI 估算值' : '手动估值'}}
+      </view>
+    </view>
+
+    <view class="chart-area">
+      <view class="row" style="margin-bottom: 8rpx;">
+        <text class="section-inline-title">收益率趋势</text>
+        <text class="muted-text">近 12 个月</text>
+      </view>
+      <view class="chart-bars">
+        <view
+          wx:for="{{chartBars}}"
+          wx:key="index"
+          class="chart-col {{item.active ? 'active' : ''}}"
+          style="height: {{item.height}}%;"
+        ></view>
+      </view>
+      <view class="chart-labels">
+        <text>1月</text><text>3月</text><text>5月</text><text>7月</text><text>9月</text><text>11月</text><text>现在</text>
+      </view>
+    </view>
+
+    <view wx:if="{{showSellInsight}}" class="insight-card">
+      <view class="insight-title">⚡ AI 卖出建议</view>
+      <view class="insight-text">{{sellInsightText}}</view>
+    </view>
+
+    <view class="card">
+      <view class="section-inline-title" style="margin-bottom: 16rpx;">估值记录</view>
+      <view class="row kv-row">
+        <text class="muted-text">当前估值</text>
+        <text class="kv-value green">{{currentValue}}</text>
+      </view>
+      <view class="divider"></view>
+      <view class="row kv-row">
+        <text class="muted-text">持有天数</text>
+        <text class="kv-value">{{days}} 天</text>
+      </view>
+      <view class="divider"></view>
+      <view class="row kv-row" bindtap="openValuation">
+        <text class="muted-text">手动估值</text>
+        <text class="kv-value blue">设置 ›</text>
+      </view>
+    </view>
+
+    <view class="btn-row" wx:if="{{aiSupported}}">
+      <button class="btn-primary btn-half" loading="{{aiLoading}}" bindtap="refreshAiValuation">刷新 AI 估值</button>
+      <button class="btn-secondary btn-half" bindtap="openValuation">手动设置</button>
+    </view>
+    <button wx:else class="btn-primary" bindtap="openValuation">设置手动估值</button>
+
+    <view class="muted-text-center">AI 估算值，仅供参考</view>
+  </block>
+
+  <view wx:if="{{showValuation}}" class="overlay" bindtap="closeValuation">
+    <view class="sheet" catchtap="">
+      <view class="sheet-handle"></view>
+      <view class="sheet-title">设置估值</view>
+      <view class="form-group">
+        <text class="form-label">当前估值 *</text>
+        <input class="form-input" type="digit" placeholder="0.00" value="{{manualValue}}" bindinput="onManualInput" />
+      </view>
+      <button class="btn-primary" disabled="{{!manualValid}}" bindtap="saveManualValuation">保存</button>
+      <button class="inline-btn cancel-btn" bindtap="closeValuation">取消</button>
+    </view>
+  </view>
+</view>

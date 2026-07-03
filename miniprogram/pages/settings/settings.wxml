@@ -1,0 +1,92 @@
+<view class="page-container has-tab">
+  <view class="card-gradient profile-card">
+    <view class="profile-emoji">📊</view>
+    <view class="profile-name">数当家</view>
+    <view class="profile-desc">个人资产全生命周期管理</view>
+    <view class="profile-meta">MVP v{{version}} · 共 {{assetCount}} 件资产</view>
+  </view>
+
+  <view class="section-title">数据管理</view>
+  <view class="card">
+    <view class="settings-item" bindtap="handleExport">
+      <view class="settings-left">
+        <view class="settings-icon">📤</view>
+        <view>
+          <view class="settings-label">导出数据</view>
+          <view class="settings-desc">复制 CSV 到剪贴板</view>
+        </view>
+      </view>
+      <text class="settings-arrow">›</text>
+    </view>
+    <view class="settings-item" bindtap="handleSync">
+      <view class="settings-left">
+        <view class="settings-icon">☁️</view>
+        <view>
+          <view class="settings-label">{{syncStatus.label}}</view>
+          <view class="settings-desc">{{syncStatus.desc}}</view>
+        </view>
+      </view>
+      <text class="tag {{syncStatus.enabled ? 'tag-green' : 'tag-gray'}}">{{syncStatus.enabled ? '可用' : '本地'}}</text>
+    </view>
+  </view>
+
+  <view class="section-title">AI 偏好</view>
+  <view class="card">
+    <view class="settings-item">
+      <view class="settings-left">
+        <view class="settings-icon">⚡</view>
+        <view>
+          <view class="settings-label">AI 智能建议</view>
+          <view class="settings-desc">消费预警、持有建议、卖出提醒</view>
+        </view>
+      </view>
+      <text class="tag tag-green">开启</text>
+    </view>
+    <view class="settings-item">
+      <view class="settings-left">
+        <view class="settings-icon">🔔</view>
+        <view>
+          <view class="settings-label">推送通知</view>
+          <view class="settings-desc">卖出时机、周报月报</view>
+        </view>
+      </view>
+      <text class="tag tag-gray">Beta</text>
+    </view>
+  </view>
+
+  <view class="section-title">其他</view>
+  <view class="card">
+    <view class="settings-item" bindtap="handleReset">
+      <view class="settings-left">
+        <view class="settings-icon">🔄</view>
+        <view>
+          <view class="settings-label">恢复示例数据</view>
+          <view class="settings-desc">重置为演示数据</view>
+        </view>
+      </view>
+      <text class="settings-arrow">›</text>
+    </view>
+    <view class="settings-item" bindtap="handleClear">
+      <view class="settings-left">
+        <view class="settings-icon">🗑️</view>
+        <view>
+          <view class="settings-label">清空全部数据</view>
+          <view class="settings-desc">删除所有资产记录</view>
+        </view>
+      </view>
+      <text class="settings-arrow">›</text>
+    </view>
+    <view class="settings-item">
+      <view class="settings-left">
+        <view class="settings-icon">ℹ️</view>
+        <view>
+          <view class="settings-label">关于数当家</view>
+          <view class="settings-desc">微信小程序 · {{version}}</view>
+        </view>
+      </view>
+      <text class="settings-arrow">›</text>
+    </view>
+  </view>
+
+  <view class="footer-note">AI 估算值与建议仅供参考，不构成投资建议</view>
+</view>

@@ -1,0 +1,92 @@
+<view class="page-container">
+  <block wx:if="{{notFound}}">
+    <view class="empty-state">
+      <view class="empty-title">物品不存在</view>
+      <button class="btn-primary" style="margin-top: 32rpx;" bindtap="goHome">返回首页</button>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view class="detail-header">
+      <view class="menu-btn" bindtap="openMenu">⋮</view>
+    </view>
+
+    <view class="card text-center" style="padding: 40rpx 28rpx;">
+      <view class="detail-emoji">{{asset.emoji}}</view>
+      <view class="detail-name">{{asset.name}}</view>
+      <view class="detail-meta">{{asset.category}} · {{asset.purchaseDate}} 购入</view>
+      <view class="detail-tags">
+        <text class="tag {{asset.statusTag}}">{{asset.status}}</text>
+        <text class="tag {{breakEven ? 'tag-green' : 'tag-orange'}}">{{breakEven ? '已回本' : '未回本'}}</text>
+      </view>
+    </view>
+
+    <view class="card-yellow text-center">
+      <view class="stat-label">日均成本</view>
+      <view class="hero-number">{{daily}}</view>
+      <view class="stat-label">购入价 {{asset.purchasePrice}} / 已用 {{days}} 天</view>
+    </view>
+
+    <view class="card">
+      <view class="row" style="margin-bottom: 12rpx;">
+        <text class="section-inline-title">回本进度</text>
+        <text wx:if="{{asset.targetDaily}}" class="target-daily">目标 {{asset.targetDaily}}/天</text>
+      </view>
+      <view class="progress-bar">
+        <view class="progress-fill" style="width: {{progress}}%;"></view>
+      </view>
+      <view class="progress-text">
+        <text>{{daysLeftText}}</text>
+        <text>{{progressText}}</text>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="section-inline-title" style="margin-bottom: 16rpx;">关键数据</view>
+      <view class="row kv-row">
+        <text class="muted-text">购入价格</text>
+        <text class="kv-value">{{asset.purchasePrice}}</text>
+      </view>
+      <view class="divider"></view>
+      <view class="row kv-row">
+        <text class="muted-text">已持有天数</text>
+        <text class="kv-value">{{days}} 天</text>
+      </view>
+      <block wx:if="{{asset.targetDaily}}">
+        <view class="divider"></view>
+        <view class="row kv-row">
+          <text class="muted-text">目标日均</text>
+          <text class="kv-value target-daily" bindtap="goEdit">{{asset.targetDaily}} ✎</text>
+        </view>
+        <block wx:if="{{breakEvenDate}}">
+          <view class="divider"></view>
+          <view class="row kv-row">
+            <text class="muted-text">预计回本日期</text>
+            <text class="kv-value">{{breakEvenDate}}</text>
+          </view>
+        </block>
+      </block>
+      <block wx:if="{{notes}}">
+        <view class="divider"></view>
+        <view class="kv-row">
+          <text class="muted-text">备注</text>
+          <text class="notes-text">{{notes}}</text>
+        </view>
+      </block>
+    </view>
+
+    <button wx:if="{{supportsAi}}" class="btn-primary" style="margin-bottom: 16rpx;" bindtap="goValue">查看价值追踪</button>
+
+    <view class="btn-row">
+      <button class="btn-primary btn-half" bindtap="goValue">更新估值</button>
+      <button class="btn-secondary btn-half" bindtap="openSell">标记已卖出</button>
+    </view>
+  </block>
+
+  <sell-sheet
+    visible="{{showSell}}"
+    asset="{{assetRaw}}"
+    bind:close="closeSell"
+    bind:confirm="onSellConfirm"
+  />
+</view>

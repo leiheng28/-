@@ -1,0 +1,6 @@
+.cancel-btn {
+  width: 100%;
+  margin-top: 16rpx;
+  padding: 24rpx;
+  color: var(--muted);
+}
