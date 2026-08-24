@@ -13,6 +13,7 @@ Page({
       category: '数码',
       purchasePrice: '',
       purchaseDate: '',
+      image: '',
       notes: '',
       targetDaily: ''
     },
@@ -40,6 +41,7 @@ Page({
         category: asset.category,
         purchasePrice: String(asset.purchasePrice),
         purchaseDate: asset.purchaseDate,
+        image: asset.image || '',
         notes: asset.notes || '',
         targetDaily: asset.targetDaily ? String(asset.targetDaily) : ''
       }
@@ -81,6 +83,27 @@ Page({
     this.setData({
       categoryIndex: index,
       'form.category': constants.CATEGORIES[index]
+    });
+  },
+
+  chooseImage: function () {
+    var that = this;
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['compressed'],
+      sourceType: ['album', 'camera'],
+      success: function (res) {
+        var tempFilePath = res.tempFilePaths[0];
+        wx.saveFile({
+          tempFilePath: tempFilePath,
+          success: function (saveRes) {
+            that.setData({ 'form.image': saveRes.savedFilePath });
+          },
+          fail: function () {
+            that.setData({ 'form.image': tempFilePath });
+          }
+        });
+      }
     });
   },
 

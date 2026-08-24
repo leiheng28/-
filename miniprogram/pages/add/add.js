@@ -17,6 +17,7 @@ Page({
       category: '数码',
       purchasePrice: '',
       purchaseDate: '',
+      image: '',
       notes: '',
       targetDaily: ''
     },
@@ -97,6 +98,27 @@ Page({
         'form.targetDaily': suggestion.targetDaily || that.data.form.targetDaily
       }, that.validate.bind(that));
     }, config.ai.recognizeDelayMs);
+  },
+
+  chooseImage: function () {
+    var that = this;
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['compressed'],
+      sourceType: ['album', 'camera'],
+      success: function (res) {
+        var tempFilePath = res.tempFilePaths[0];
+        wx.saveFile({
+          tempFilePath: tempFilePath,
+          success: function (saveRes) {
+            that.setData({ 'form.image': saveRes.savedFilePath });
+          },
+          fail: function () {
+            that.setData({ 'form.image': tempFilePath });
+          }
+        });
+      }
+    });
   },
 
   handleSubmit: function () {

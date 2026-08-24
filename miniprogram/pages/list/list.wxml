@@ -36,7 +36,10 @@
         data-id="{{item.id}}"
         bindtap="goDetail"
       >
-        <view class="list-avatar">{{item.emoji}}</view>
+        <view class="list-avatar">
+          <image wx:if="{{item.image}}" src="{{item.image}}" mode="aspectFill" class="list-avatar-image" />
+          <text wx:else>{{item.emoji}}</text>
+        </view>
         <view class="list-info">
           <view class="list-title">{{item.name}}</view>
           <view class="list-sub">

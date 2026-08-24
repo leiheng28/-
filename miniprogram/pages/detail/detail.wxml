@@ -12,7 +12,10 @@
     </view>
 
     <view class="card text-center" style="padding: 40rpx 28rpx;">
-      <view class="detail-emoji">{{asset.emoji}}</view>
+      <view class="detail-image-container">
+        <image wx:if="{{asset.image}}" src="{{asset.image}}" mode="aspectFill" class="detail-image" />
+        <view wx:else class="detail-emoji">{{asset.emoji}}</view>
+      </view>
       <view class="detail-name">{{asset.name}}</view>
       <view class="detail-meta">{{asset.category}} · {{asset.purchaseDate}} 购入</view>
       <view class="detail-tags">

@@ -8,6 +8,17 @@
 
   <block wx:else>
     <view class="form-group">
+      <text class="form-label">物品图片</text>
+      <view class="image-upload" bindtap="chooseImage">
+        <image wx:if="{{form.image}}" src="{{form.image}}" mode="aspectFill" class="upload-image" />
+        <view wx:else class="upload-placeholder">
+          <view class="upload-icon">📷</view>
+          <view class="upload-text">点击上传图片</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="form-group">
       <text class="form-label">物品名称 *</text>
       <input class="form-input" placeholder="2-30 字" maxlength="30" value="{{form.name}}" bindinput="onNameInput" />
     </view>

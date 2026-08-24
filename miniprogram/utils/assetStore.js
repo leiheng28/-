@@ -47,6 +47,7 @@ var assetStore = {
       purchaseDate: form.purchaseDate,
       status: '服役中',
       emoji: constants.CATEGORY_EMOJI[form.category] || '📦',
+      image: form.image || undefined,
       notes: form.notes || undefined,
       targetDaily: form.targetDaily ? parseFloat(form.targetDaily) : undefined,
       createdAt: Date.now()
@@ -76,6 +77,7 @@ var assetStore = {
       category: form.category,
       purchasePrice: parseFloat(form.purchasePrice),
       purchaseDate: form.purchaseDate,
+      image: form.image || undefined,
       notes: form.notes || undefined,
       targetDaily: form.targetDaily ? parseFloat(form.targetDaily) : undefined
     });
